@@ -10,10 +10,10 @@ then
     yum -y install iptables-services.x86_64
     systemctl enable --now iptables.service
     iptables -F
-    iptables-restore < ./$target/iptables
+    iptables-restore < ./output-linux-basic/$target/iptables
     iptables-save
     service iptables save
-    yes | cp -rf ./$target/ifcfg-enp0s3_backup /etc/sysconfig/network-scripts/ifcfg-enp0s3
+    yes | cp -rf ./output-linux-basic/$target/ifcfg-enp0s3 /etc/sysconfig/network-scripts/ifcfg-enp0s3
     systemctl restart network
     hostnamectl set-hostname backup
     systemctl reboot
