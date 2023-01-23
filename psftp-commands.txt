@@ -1,0 +1,3 @@
+lcd c:\temp\distrib
+cd otus-linux-basic
+mput -r *
