@@ -15,7 +15,7 @@ then
     service iptables save
     yes | cp -rf ./otus-linux-basic/$target/ifcfg-enp0s3 /etc/sysconfig/network-scripts/ifcfg-enp0s3
     systemctl restart network
-    hostnamectl set-hostname backup
+    hostnamectl set-hostname $target
     systemctl reboot
 else
     echo "unknown input"
