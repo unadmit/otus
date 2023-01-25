@@ -17,6 +17,7 @@ for %%x in (
     )
 C:\Progra~1\Oracle\VirtualBox\VBoxManage.exe modifyvm "elk" --memory 4096
 C:\Progra~1\Oracle\VirtualBox\VBoxManage.exe startvm "backup"
+timeout 25 > NUL
 C:\Progra~1\PuTTY\psftp root@192.168.1.100 -i c:\temp\id_rsa.ppk -b c:\Temp\otus-linux-basic\psftp-commands.txt
 for %%x in (
     backup
