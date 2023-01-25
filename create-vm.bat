@@ -31,5 +31,4 @@ for %%x in (
         timeout 25 > NUL
         echo "run remote bash script on %%x"
         C:\Progra~1\PuTTY\plink.exe 192.168.1.100 -l root -i c:\temp\id_rsa.ppk -batch /root/otus-linux-basic/prepare.sh -t %%x
-        C:\Progra~1\PuTTY\putty.exe 192.168.1.100 -ssh -l root -i c:\temp\id_rsa.ppk
     )
