@@ -26,6 +26,7 @@ then
     systemctl restart network
     hostnamectl set-hostname $target
     shutdown -r 1
+    exit 0
 else
     echo "unknown input"
     exit 1
