@@ -19,10 +19,10 @@ systemctl restart mysqld
 sleep 5
 root_temp_pass=$(grep 'A temporary password' /var/log/mysqld.log |tail -1 |awk '{split($0,a,": "); print a[2]}')
 pass="Qwe-1234"
-mysql --skip-column-names -p$root_temp_pass -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH 'caching_sha2_password' BY '${pass}'; "
+mysql --skip-column-names --connect-expired-password -p$root_temp_pass -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH 'caching_sha2_password' BY '${pass}'; "
 mysql --skip-column-names -p$pass -e "FLUSH PRIVILEGES; "
 mysql_secure_installation -u root --password="${pass}" --use-default
-mstatus=$(mysql -h 192.168.1.196 -p$pass --batch --disable-column-names -e "show master status;")
+mstatus=$(mysql -h 192.168.1.196 -urepl -p$pass --batch --disable-column-names -e "show master status;")
 blog=$(echo $mstatus | awk -F" " '{print $1}')
 bpos=$(echo $mstatus | awk -F" " '{print $2}')
 mysql --skip-column-names -p$pass -e "CHANGE MASTER TO MASTER_HOST='192.168.1.196', MASTER_USER='repl', MASTER_PASSWORD='Qwe-1234', MASTER_LOG_FILE=$blog, MASTER_LOG_POS=$bpos, GET_MASTER_PUBLIC_KEY = 1; "
