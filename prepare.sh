@@ -24,7 +24,7 @@ then
     /bin/bash ./otus-linux-basic/$target.sh
     yes | cp -rf ./otus-linux-basic/$target/ifcfg-enp0s3 /etc/sysconfig/network-scripts/ifcfg-enp0s3
     hostnamectl set-hostname $target
-    shutdown -r 1
+    /bin/bash -c "sleep 5;shutdown -r now" &
     exit 0
 else
     echo "unknown input"
