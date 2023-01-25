@@ -1,6 +1,13 @@
 #!/bin/bash
 targetlist="backup elk prometheus apache-mysql-slave nginx-apache-mysql"
-read -p "enter target[backup/elk/prometheus/apache-mysql-slave/nginx-apache-mysql]" target
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        -t|--target) target="$2"; shift ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+echo "Target: $target"
 if echo $targetlist | grep -w $target > /dev/null
 then
     setenforce 0
@@ -18,7 +25,7 @@ then
     yes | cp -rf ./otus-linux-basic/$target/ifcfg-enp0s3 /etc/sysconfig/network-scripts/ifcfg-enp0s3
     systemctl restart network
     hostnamectl set-hostname $target
-    systemctl reboot
+    shutdown -r 1
 else
     echo "unknown input"
     exit 1
