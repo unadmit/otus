@@ -29,17 +29,12 @@ scrape_configs:
     static_configs:
       - targets: ["localhost:9090"]
 
-  - job_name: 'prometheus'
+  - job_name: 'nodes'
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9100']
-
-  - job_name: 'nginx-apache-mysql'
-    scrape_interval: 5s
-    static_configs:
+        labels: {'host': 'prometheus' }
       - targets: ['192.168.1.196:9100']
-
-  - job_name: '\apache-mysql-slave'
-    scrape_interval: 5s
-    static_configs:
+        labels: {'host': 'nginx-apache-mysql' }
       - targets: ['192.168.1.197:9100']
+        labels: {'host': 'apche-mysql-slave' }
