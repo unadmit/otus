@@ -12,5 +12,6 @@
 -A INPUT -p tcp -m tcp --dport 5601 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 9300 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 5400 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 9200 -j ACCEPT
 COMMIT
 # Completed on Tue Jan 17 12:13:35 2023
