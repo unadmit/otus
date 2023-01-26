@@ -26,9 +26,9 @@ mysql_secure_installation -u root --password="${pass}" --use-default
 mstatus=$(mysql -h 192.168.1.196 -urepl -p$pass --batch --disable-column-names -e "show master status;")
 blog=$(echo $mstatus | awk -F" " '{print $1}')
 bpos=$(echo $mstatus | awk -F" " '{print $2}')
-mysql --skip-column-names -p$pass -e "CHANGE MASTER TO MASTER_HOST='192.168.1.196', MASTER_USER='repl', MASTER_PASSWORD='Qwe-1234', MASTER_LOG_FILE='$blog', MASTER_LOG_POS=$bpos, GET_MASTER_PUBLIC_KEY = 1; "
+mysql --skip-column-names -p$pass -e "CHANGE MASTER TO MASTER_HOST='192.168.1.196', MASTER_USER='repl', MASTER_PASSWORD='Qwe-1234Qwe-1234', MASTER_LOG_FILE='$blog', MASTER_LOG_POS=$bpos, GET_MASTER_PUBLIC_KEY = 1; "
 mysql --skip-column-names -p$pass -e "START SLAVE; "
-ssh root@192.168.1.196 "/bin/bash -c /root/otus-linux-basic/restore-mysql.sh"
+ssh root@192.168.1.196 -o StrictHostKeyChecking=no "/bin/bash -c /root/otus-linux-basic/restore-mysql.sh"
 rpm -i ./otus-linux-basic/apache-mysql-slave/*.rpm
 yes | cp -vf ./otus-linux-basic/apache-mysql-slave/filebeat.yml /etc/filebeat/
 systemctl enable --now filebeat

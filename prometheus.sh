@@ -19,4 +19,7 @@ systemctl daemon-reload
 systemctl enable --now prometheus.service
 systemctl enable --now node_exporter
 yum -y install ./otus-linux-basic/prometheus/grafana-9.3.2-1.x86_64.rpm
+rsync -P ./otus-linux-basic/prometheus/grafana.db /var/lib/grafana
+chown -v grafana: /var/lib/grafana/grafana.db
+chmod 600 /var/lib/grafana/grafana.db
 systemctl enable --now grafana-server.service
